@@ -172,13 +172,12 @@ print(bool(''), bool('abc123'))
 # 환율 계산프로그램 작성
 # 달러를 입력하면 원화로 계산해서 출력 (1$ -> 1382.12원)
 
-
-#exchange =  input('달러')
-#print(int(exchange) *  1382.12)
+#exchange = input('달러')
+#print(int(exchange) * 1382.12)
 #print(dollar, won)
 
 #dollar = input('달러는? ')
-#won = int(dollar) * 1382
+#won = int(dollar) * 1382.12
 #print(won, dollar)
 
 # 문자열 템플릿
