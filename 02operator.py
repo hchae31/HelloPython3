@@ -13,7 +13,6 @@
 # 매출액 입력시 총합 출력
 
 
-
 # 1분기 수익 계산
 # JanuaryMargin = int(input('1월매출: '))
 # FabraryMargin = int(input('2월매출: '))
@@ -36,29 +35,51 @@
 # print(f'BMI : {BIM}kg*m')
 
 # 홀짝 게임
-coins = int(input('손안에 동전수를 입력하세요 : '))
-result = coins % 2
-
-print(f'{result} % 2')
-print(f'{coins % 2}')
+# coins = int(input('손안에 동전수를 입력하세요 : '))
+# result = coins % 2
+#
+# print(f'{result} % 2')
+# print(f'{coins % 2}')
 
 # 빵 나누기
-breads = 97
-divider = 3
-studs = 97 // 3 #을 나눌 정수
-mods = 97 % 3  #나머지값
+# breads = 97
+# divider = 3
+# studs = 97 // 3 #을 나눌 정수
+# mods = 97 % 3  #나머지값
+#
+# print(f'''
+# 빵을 나누어 줄수 있는 학생수 : {studs}
+# 남는 빵 갯수 : {mods}''')
+#
+# # 전염병 예상 감염자 구하기
+# # 1일차 -> 2명
+# # 2일차 -> 4명
+# # 3일차 -> 8명
+# # 4일차 -> 16명
+# # n일차 -> 2 ** n명
+# infectors = 2 ** 30
+#
+# print(f'30일 이후 예상 감염자 수 : {infectors}')
 
-print(f'''
-빵을 나누어 줄수 있는 학생수 : {studs}
-남는 빵 갯수 : {mods}''')
+#할당 연산자
 
-# 전염병 예상 감염자 구하기
-# 1일차 -> 2명
-# 2일차 -> 4명
-# 3일차 -> 8명
-# 4일차 -> 16명
-# n일차 -> 2 ** n명
-infectors = 2 ** 30
+#논리 연산자
 
-print(f'30일 이후 예상 감염자 수 : {infectors}')
+#논리 연산자 단축식 평가
 
+#삼항 연산자
+
+#조건문을 한 줄로 표현할 수 있는 연산자
+#참일때값 if 조건식 else 거짓일때값
+myScore = 75
+result = '합격!' if myScore >= 90 else '불합격!'
+print(result)
+
+# 복리 계산기
+
+# 범퍼카 탑승
+# 범퍼카 탑승 가능 판별
+# 적자/흑자 판별
+
+#다음 지문을 읽고 밑줄 친 부분에 맞는 코드를 완성하시오
+# 사무실 냉/난방기는 실내 온도가 16도 이하 또는 28도 초과 시 작동한다.

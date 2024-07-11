@@ -43,31 +43,27 @@ chiken = 1
 
 total = (soju * 3000) + (chiken * 12000)
 vat = total * (10/110)  # 부가세 = 합계금액 * 10/110
-supply = total *(100/110) # 공급가액 = 합계금액 * 100/110
+supply = total * (100/110) # 공급가액 = 합계금액 * 100/110
 
- # 부가세 = 합계금액 * 0.1
+# 부가세 = 합계금액 * 0.1
 paid = 50000
 charge = paid - total
 
 print(f'''
-[음식나라]
-----------------------
-소주\t\t{soju}\t{soju}\t\t{soju * 3000}
-너나치킨\t{chiken}\t\t{chiken * 12000}
-----------------------
-과세합계\t\t\t{int(supply)}
-부가세\t\t\t{int(vat)}
-----------------------
-총합계\t\t\t\t{total}
-받은금액\t\t\t{paid}
-잔돈\t\t\t\t{charge}
-----------------------
-{date}
-''')
-
-
-
-
+ [음식나라]
+ ----------------------
+ 소주\t\t{soju}\t{soju}\t\t{soju * 3000}
+ 너나치킨\t{chiken}\t\t{chiken * 12000}
+ ----------------------
+ 과세합계\t\t\t{int(supply)}
+ 부가세\t\t\t{int(vat)}
+ ----------------------
+ 총합계\t\t\t\t{total}
+ 받은금액\t\t\t{paid}
+ 잔돈\t\t\t\t{charge}
+ ----------------------
+ {date}
+ ''')
 
 # # 3
 # rate1 = 123
