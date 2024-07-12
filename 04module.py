@@ -30,8 +30,8 @@ print(rnd.sample(range(1, 46), 6))
 # 날짜 시간 처리
 import datetime as dt
 
-print(dt.dateitme.now())
-print(dt.dateitme.today())
+print(dt.datetime.now())
+print(dt.datetime.today())
 print(dt.datetime.now()
       .strftime('%Y년 %m월 %d일 %H시 %M분 %S초'))
 # operator 모듈
@@ -39,12 +39,48 @@ print(dt.datetime.now()
 
 # 긴급재난 지원금 대상자 판별
 
-
+# import operator as op
+# income = int(input('월소득을 입력하세요 : '))
+# isOther = int(
+#   input('다른 지원금을 받고 있습니까? 1: 받음 2: 받지 않음 '))
+#
+# # result = '수급대상자' if income <= 4000000 \
+#                     # & (isOther == 2) else '수급 비대상자'
+# result = '수급대상자' if (op.le(income, 4000000)) \
+#               & (op.eq(isOther,2)) else '수급 비대상자'
+# print(result)
 # 수온 계산기
+# import operator as op
+# basetemp = 20
+# deeps = int(input('수심을 입력하세요 : '))
+# # temp = basetemp - (deeps // 10 * 0.7)
+# temp = op.sub(basetemp,
+#        op.mul(op.floordiv(deeps,10, 0.7))
+#
+# print(f' 수심 {deeps} m - 수온 {temp} ℃') #특수기호 : ㄹ + '한자'키
 
 #자동차 주행거리 계산
 
+# import operator as op
+#
+# speed = int(input('주행 속도 : '))
+# time = int(input('주행 시간 : '))
+#
+# # dist = speed * time
+# dist = op.mul(speed, time)
+#
+# print(f'주행 이동 거리 : {dist} km')
+
 # 컴퓨터 업무 수량 파악
+# 3 * 8 = comp * time
+# comp = 3 * 8 / time
 
+worktime = int(input('근무시간을 입력하세요 : '))
 
+# comp = 3 * 8 / worktime
+# etcComp = 1 if (3 * 8 % worktime) > 0 else 0
+expr1 = op.mul(3,8)
+comp = op.floordiv(expr1, worktime)
+etcComp = 1 if (op.mod(expr1, worktime) > 0) else 0
 
+print(f'필요한 컴퓨터 : {comp + etcComp}')
