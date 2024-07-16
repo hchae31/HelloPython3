@@ -113,29 +113,32 @@ while i < 100:
     if i == 33 or i == 66 or i == 99: jjak += ' 짝!'
     print(i, jjak)
     i += 1
+
 # 열차 교차시간 만들기
 trainA = 10
 trainB = 25
 trainC = 30
-min = 1
+mins = 1
 
-while min < 541:
-    for min in range(1, 540+1):
-        if min % trainA == 0 and min % trainB == 0: # 50분간격
-            hour = 9 + min // 60
-            min = min % 60
-            print(f'{hour}시 {min}분 : A - B 교차!')
+while mins < 541:
+    if mins % 5 == 0:
+        if mins % trainA == 0 and mins % trainB == 0: # 50분간격
+            hour = 9 + mins // 60
+            min = mins % 60
+            print(f'{9 + mins // 60:02d}시 {mins % 60:02d}분 : A - B 교차!')
 
-        elif min % trainB == 0 and min % trainC == 0:
-            hour = 9 + min // 60
-            min = min % 60
-            print(f'{hour}시 {min}분 : B - C 교차!')
+        elif mins % trainB == 0 and mins % trainC == 0:
 
-        elif min % trainC == 0 and min % trainA == 0: # 30분간격
-            hour = 9 + min // 60
-            min = min % 60
-            print(f'{hour}시 {min}분 : C - A 교차!')
-    min += 1
+            print(f'{9+ mins // 60:02d}시 {mins // 60:02d}분 : B - C 교차!')
+
+        elif mins % trainC == 0 and mins % trainA == 0:
+
+            print(f'{9+ mins // 60:02d}시 {mins // 60:02d}분 : C - A교차!')
+
+        elif mins % trainA == 0 and mins % trainB == 0 and mins % trainC: # 30분간격
+
+            print(f'{9 + mins // 60:02d}시 {mins % 60:02d}분 : A - B - C 교차!')
+    mins += 1
 
 
 # 로그인 기능 만들기
@@ -155,4 +158,33 @@ while True:
         print('로그인 실패! 횟수 초과!')
         break
     cntLogin += 1
-#
+
+# 반복문 내 건너뛰기 : continue
+# for, while문 내에서 반복흐름을 일시적으로 넘기기 위해 사용
+
+# 1 ~ 10 사이 정수 중 홀수의 합 출력
+sum = 0
+
+for i in range(1, 10+1):
+    if i % 2 == 0: continue
+    sum += i
+
+print(sum)
+
+# 1 ~ 100 사이 정수의 합을 출력
+# 단, 3의 배수나 7의 배수는 제외
+sum = 0
+for i in range(1, 100+1):
+    if i % 3 == 0 and i % 7 == 0: continue
+    sum += i
+print(sum)
+---------------------------
+sum = 0
+i = 1
+
+while i < 101:
+    i += 1
+    if i % 3 == 0 or i % 7 == 0: continue
+    sum += i
+
+print(sum)
