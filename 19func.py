@@ -46,15 +46,25 @@ say_weather('흐림')
 # 단위 변환 : 인치 -> 센티미터
 def convert_inch(inch):
     cm = inch * 2.54
-    print(f'{inch} -> {cm}')
+    print(f'{inch} inch -> {cm:.1f} cm')  #.1f :소수점첫째자리까지입력
 
+inch = float(input('길이를 입력하세요(inch) : '))
+convert_inch(inch)
 
-
-
+# 오답
 # def convert_centimeter(inch):
 #     centi = inch * 2.54
 #     print(f' {centi} cm')
 #     return centi
 
+
+# 변수의 유효범위scope
+# scope: 변수가 접근 가능한 범위를 의미
+# 전역 scope: 프로그램의 최상위 레벨에서 정의된 변수
+#            어느 곳에서나 접근 가능
+#            함수내에서는 global이라는 키워드를 사용해서 전역변수에 접근가능
+# 지역 scope:  반복문 내부 / 함수 내부에 정의된 변수
+#             반복문이나 함수 내에서만 접근 가능
+#             반복문 실행 종료나 함수 호출이 끝나면 자연 소멸
 
 
