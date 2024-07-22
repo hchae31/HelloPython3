@@ -61,6 +61,20 @@ def readOneSungJuk(sjno):
     conn.close()
     return sj
 
+#
+def deleteEmp(empid):
+    sql = 'delete from sungjuk where empid = ?'
+    conn = sqlite3.connect('db/python.db')
+    cursor = conn.cursor()
+    params = (empid,)
+    cursor.execute(sql, params)
+    cnt = cursor.rowcount
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return cnt
+
+
 
 
 

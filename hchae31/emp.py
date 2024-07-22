@@ -66,6 +66,14 @@ def showOneEmp():
     print(result)
 
 
+#
+def removeEmp():
+    empid = input('삭제할 사원의 사원번호는? ')
+    result = '데이터가 존재하지 않아요!!'
+    cnt = empdao.deleteEmp(empid)
+    if cnt > 0:
+        result = f'{cnt} 건의 데이터가 삭제됨!!'
+    print(cnt, '건의 데이터가 삭제됨!!')
 
 
 
