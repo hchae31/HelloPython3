@@ -62,10 +62,9 @@ class SungJukService:
         result = ''
         sj = sjdao.selectone_sungjuk()
         if sj:
-            result += f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '\
-                      (f'총점: {sj.tot}, '
-                       f'평균: {sj.avg:.1f}, 학점: {sj.grd}, 영어: {sj.eng}, '
-                       f'수학: {sj.mat}, 등록일: {sj.regdate}\n')
+            result += (f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '
+                      f'영어: {sj.eng}, 수학: {sj.mat}\n총점: {sj.tot}, '
+                       f'평균: {sj.avg:.1f}, 학점: {sj.grd}, 등록일: {sj.regdate}')
         print(result)
 
     @staticmethod
@@ -81,5 +80,9 @@ class SungJukService:
 
     @staticmethod
     def remove_sungjuk():
+        sjno = input('삭제할 학생번호는: ')
+        cnt = sjdao.delete_sungjuk(sjno)
+        print(f'{cnt} 건의 데이터 삭제됨!!')
+
 
 
