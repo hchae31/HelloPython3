@@ -60,10 +60,12 @@ class SungJukService:
     @staticmethod
     def show_sungjuk():
         result = ''
-        sjs = sjdao.select_sungjuk()
-        for sj in sjs:
+        sj = sjdao.selectone_sungjuk()
+        if sj:
             result += f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '\
-                      f'영어: {sj.eng}, 수학: {sj.mat}, 등록일: {sj.regdate}\n'
+                      (f'총점: {sj.tot}, '
+                       f'평균: {sj.avg:.1f}, 학점: {sj.grd}, 영어: {sj.eng}, '
+                       f'수학: {sj.mat}, 등록일: {sj.regdate}\n')
         print(result)
 
     @staticmethod
@@ -76,7 +78,8 @@ class SungJukService:
 
     def readagain_sungjuk(self):
         pass
+
     @staticmethod
     def remove_sungjuk():
-        pass
+
 
