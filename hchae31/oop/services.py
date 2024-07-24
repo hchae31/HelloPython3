@@ -162,10 +162,20 @@ class EmpService:
             result += (f' {emp.empid}, {emp.fname}, {emp.email}, {emp.jobid},'
                        f' {emp.deptid}\n')
         print(result)
-    
-    def showone_emp(self):
-        pass
-    
+
+    @staticmethod
+    def showone_emp():
+        empid = input('조회할 사원 번호는? ')
+        result = '데이터가 존재하지 않아요!!'
+        emp = empdao.selectone_emp(empid)
+        if emp:   # 조회한 데이터가 존재한다면
+            result = (f'{emp.empid} {emp.fname} {emp.lname} {emp.email}'
+                      f'{emp.phone}\n'
+                      f'{emp.hdate} {emp.jobid} {emp.sal} {emp.comm} {emp.mgrid}'
+                      f'{emp.deptid}')
+        print(result)
+
+
     def modify_emp(self):
         pass
     
