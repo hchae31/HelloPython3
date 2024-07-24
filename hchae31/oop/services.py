@@ -60,23 +60,43 @@ class SungJukService:
     @staticmethod
     def show_sungjuk():
         result = ''
-        sj = sjdao.selectone_sungjuk()
-        if sj:
-            result += (f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '
-                      f'영어: {sj.eng}, 수학: {sj.mat}\n총점: {sj.tot}, '
-                       f'평균: {sj.avg:.1f}, 학점: {sj.grd}, 등록일: {sj.regdate}')
+        sjs = sjdao.select_sungjuk()
+        for sj in sjs:
+            result += f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '\
+                      f'영어: {sj.eng}, 수학: {sj.mat}\n'
         print(result)
 
     @staticmethod
     def showone_sungjuk():
-        pass
+        result = ''
+        sj = sjdao.select_sungjuk()
+        if sj:
+            result += (f'번호: {sj.sjno}, 이름: {sj.name}, 국어: {sj.kor}, '
+                       f'영어: {sj.eng}, 수학: {sj.mat}\n총점: {sj.tot}, '
+                       f'평균: {sj.avg:.1f}, 학점: {sj.grd}, 등록일: {sj.regdate}')
+        print(result)
 
     @staticmethod
     def modify_sungjuk():
-        pass
+        sjno = input('수정할 학생번호는? ')
+        sj = sjdao.selectone_sungjuk(sjno)
+        result = '수정할 데이터가 존재하지 않아요!'
+        if sj:
+            sj = SungJukService.readagain_sungjuk(sj)
+            cnt = sjdao.update_sungjuk(sj)
+        print(result)
 
-    def readagain_sungjuk(self):
-        pass
+
+
+    @staticmethod
+    def readagain_sungjuk(sj):
+        nsj = SungJuk(sj.name, None,None,None)
+        nsj.kor = int(input(f'{sj.name}번 학생 국어는? ({sj.kor})'))
+        nsj.eng = int(input(f'{sj.name}번 학생 영어는? ({sj.eng})'))
+        nsj.mat = int(input(f'{sj.name}번 학생 수학은? ({sj.mat})'))
+        SungJukService.compute_sungjuk(nsj)
+        nsj.sjno = sj.sjno
+        return nsj
 
     @staticmethod
     def remove_sungjuk():

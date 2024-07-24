@@ -37,7 +37,7 @@ class SungJukDAO:
         conn, cursor = SungJukDAO._make_conn()
         cursor.execute(sql)
 
-        rs = cursor.fetchone()
+        rs = cursor.fetchall()
         for r in rs:    # 조회결과를 SungJuk 객체에 개별 저장
             sj = SungJuk(r[1],r[2],r[3],r[4])
             sj.sjno = r[0]
@@ -45,7 +45,7 @@ class SungJukDAO:
             sjs.append(sj)
 
         SungJukDAO._dis_conn(conn, cursor)
-        return sj
+        return sjs
 
     def selectone_sungjuk(sjno):
         sql = 'select * from sungjuk where sjno = ?'
@@ -65,8 +65,17 @@ class SungJukDAO:
         SungJukDAO._dis_conn(conn, cursor)
         return sj
 
-    def update_sungjuk(self):
-        pass
+    def update_sungjuk(sj):
+        sql = 'update sungjuk set kor=?, eng=?, mat=?, tot=?, avg=?, grd=? \
+            where sjno = ?'
+        conn, cursor =SungJukDAO._make_conn()
+        params = (sj.kor, sj.eng, sj.mat, sj.tot, sj.avg, sj.grd, sj.sjno)
+        cursor.execute(sql, params)
+        cnt = cursor.rowcount
+        conn.commit()
+        SungJukDAO._dis_conn(conn, cursor)
+        return cnt
+
     @staticmethod
     def delete_sungjuk(self):
         sql = 'delete from sungjuk where sjno = ?'
