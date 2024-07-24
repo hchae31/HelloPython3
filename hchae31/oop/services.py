@@ -1,5 +1,6 @@
-from hchae31.oop.models import SungJuk
+from hchae31.oop.models import SungJuk, Employee
 from hchae31.oop.dao import SungJukDAO as sjdao
+from hchae31.oop.dao import EmpDAO as empdao
 
 # 성적 서비스 클래스
 class SungJukService:
@@ -104,5 +105,69 @@ class SungJukService:
         cnt = sjdao.delete_sungjuk(sjno)
         print(f'{cnt} 건의 데이터 삭제됨!!')
 
+# 사원 서비스 클래스
+class EmpService:
+    @staticmethod
+    def display_menu():
+        main_menu = '''
+        =========================
+            사원 등록프로그램 
+        =========================
+           1. 사원 데이터 추가
+           2. 사원 데이터 조회
+           3. 사원 데이터 상세조회
+           4. 사원 데이터 수정
+           5. 사원 데이터 삭제
+           0. 사원 프로그램 종료
+        ========================= 
+        '''
+        print(main_menu, end='')
+        menu = input('=> 메뉴를 선택하세요 : ')
+        return menu
+
+    @staticmethod
+    def read_emp():
+        empid = input(f'사원 번호는? ')
+        fname = input(f'사원 이름은? ')
+        lname = input(f'사원 성은? ')
+        email = input(f'사원 이메일은? ')
+        phone = input(f'사원 전화번호는? ')
+        hdate = input(f'사원 입사일은? ')
+        jobid = input(f'사원 직책은? ')
+        sal = input(f'사원 급여는? ')
+        comm = input(f'사원 수당은? (없으면 0) ')
+        mgrid = input(f'사원 매니저 번호는(없으면 0)? ')
+        deptid = input(f'사원 부서 번호는(없으면 0)? ')
+        return Employee(empid, fname, lname, email, phone, hdate,
+                        jobid, sal, comm, mgrid, deptid)
+
+    @staticmethod
+    def add_emp():
+        emp = EmpService.read_emp()
+        emp.comm = float(emp.comm) if emp.comm != '0' else None
+        emp.mgrid = int(emp.mgrid) if emp.mgrid != '0' else None
+        emp.deptid = int(emp.deptid) if emp.deptid != '0' else None
+        cnt = empdao.insert_emp(emp)
+        print(f'{cnt} 건의 데이터가 추가됨!!')
+    
+    def show_emp(self):
+        pass
+    
+    def showone_emp(self):
+        pass
+    
+    def modify_emp(self):
+        pass
+    
+    def remove_emp(self):
+        pass
+    
+    
+        
+        
+        
+        
+    
+    
 
 

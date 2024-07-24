@@ -98,7 +98,7 @@ class SungJukDAO:
         return cnt
 
     @staticmethod
-    def delete_sungjuk(self):
+    def delete_sungjuk(sjno):
         sql = 'delete from sungjuk where sjno = %s'
         conn, cursor = SungJukDAO._make_conn()
         params = (sjno,)
@@ -108,3 +108,32 @@ class SungJukDAO:
         SungJukDAO._dis_conn(conn, cursor)
         return cnt
 
+# 사원 DAO 클래스
+class EmpDAO:
+    # 데이터베이스 연결객체와 커서 생성
+    @staticmethod
+    def _make_conn():
+        conn = pymysql.connect(host=host, user=user,
+                               password=passwd, database=dbname, charset='utf8')
+        cursor = conn.cursor()
+        return conn, cursor
+
+    # 데이터베이스 연결객체와 커서 종료
+    @staticmethod
+    def _dis_conn(conn,cursor):
+        cursor.close()
+        conn.close()
+    # 사원데이터 저장
+    @staticmethod
+    def insert_emp(emp):
+        sql = "insert into emp values " \
+                "(%s,%s,%s,%s, %s,%s,%s,%s, %s,%s,%s)"
+        conn, cursor = EmpDAO._make_conn()
+        params = (emp.empid,emp.fname, emp.lname, emp.email,
+                    emp.phone,emp.hdate,
+                  emp.jobid,emp.sal,emp.comm,emp.mgrid,emp.deptid)
+        cursor.execute(sql, params)
+        cnt = cursor.rowcount
+        conn.commit()
+        EmpDAO._dis_conn(conn, cursor)
+        return cnt
