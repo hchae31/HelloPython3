@@ -1,14 +1,21 @@
-import sqlite3
+# import sqlite3
+import pymysql
 
 from hchae31.oop.models import SungJuk
 
+# 데이터베이스 연결 문자열
+host = '43.203.124.230'
+dbname = 'clouds2024'
+user = 'clouds2024'
+passwd = 'clouds2024'
 
 # 성적 DAO 클래스
 class SungJukDAO:
     # 데이터베이스 연결객체와 커서 생성
     @staticmethod
     def _make_conn():
-        conn = sqlite3.connect('db/python.db')
+        conn = pymysql.connect(host=host, user=user,
+                               password=passwd, database=dbname, charset='utf8')
         cursor = conn.cursor()
         return conn, cursor
 
@@ -20,8 +27,13 @@ class SungJukDAO:
 
     @staticmethod
     def insert_sungjuk(sj):
+        """
+        입력한 성적 데이터를 성적테이블에 저장
+        :param sj: 테이블에 저장할 성적데이터
+        :return cnt: 테이블에 성공적으로 저장된 데이터 건수
+        """
         sql = 'insert into sungjuk (name, kor, eng, mat, tot, avg, grd) \
-           values (?,?,?,?, ?,?,?)'
+           values (%s, %s, %s, %s, %s, %s, %s)'
         conn, cursor = SungJukDAO._make_conn()
         params = (sj.name, sj.kor, sj.eng, sj.mat, sj.tot, sj.avg, sj.grd)
         cursor.execute(sql, params)
@@ -32,8 +44,13 @@ class SungJukDAO:
 
     @staticmethod
     def select_sungjuk():
+
+        """
+        sungjuk 테이블에서 모든 성적 데이터(번호/이름/국어/영어/수학/등록일)를 읽어옴
+        :return: 조회된 성적데이터 객체
+        """
         sjs = []
-        sql = 'select sjno,name,kor,eng,mat,substr(regdate,0,11) regdate from sungjuk'
+        sql = 'select sjno,name,kor,eng,mat,substr(regdate,1,11) regdate from sungjuk'
         conn, cursor = SungJukDAO._make_conn()
         cursor.execute(sql)
 
@@ -43,12 +60,16 @@ class SungJukDAO:
             sj.sjno = r[0]
             sj.regdate = r[5]
             sjs.append(sj)
-
         SungJukDAO._dis_conn(conn, cursor)
         return sjs
 
     def selectone_sungjuk(sjno):
-        sql = 'select * from sungjuk where sjno = ?'
+        """
+        sungjuk 테이블에서 특정학생의 성적데이터를 읽어옴
+        :param sjno: 조회할 학생의 학생번호
+        :return: 조회된 학생의 성적데이터
+        """
+        sql = 'select * from sungjuk where sjno = %s'
         conn, cursor = SungJukDAO._make_conn()
         params = (sjno,)
         cursor.execute(sql, params)
@@ -66,8 +87,8 @@ class SungJukDAO:
         return sj
 
     def update_sungjuk(sj):
-        sql = 'update sungjuk set kor=?, eng=?, mat=?, tot=?, avg=?, grd=? \
-            where sjno = ?'
+        sql = 'update sungjuk set kor=%s, eng=%s, mat=%s, tot=%s, avg=%s, grd=%s \
+            where sjno = %s'
         conn, cursor =SungJukDAO._make_conn()
         params = (sj.kor, sj.eng, sj.mat, sj.tot, sj.avg, sj.grd, sj.sjno)
         cursor.execute(sql, params)
@@ -78,7 +99,7 @@ class SungJukDAO:
 
     @staticmethod
     def delete_sungjuk(self):
-        sql = 'delete from sungjuk where sjno = ?'
+        sql = 'delete from sungjuk where sjno = %s'
         conn, cursor = SungJukDAO._make_conn()
         params = (sjno,)
         cursor.execute(sql, params)
