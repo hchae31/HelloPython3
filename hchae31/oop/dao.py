@@ -1,7 +1,7 @@
 # import sqlite3
 import pymysql
 
-from hchae31.oop.models import SungJuk
+from hchae31.oop.models import SungJuk, Employee
 
 # 데이터베이스 연결 문자열
 host = '43.203.124.230'
@@ -137,3 +137,19 @@ class EmpDAO:
         conn.commit()
         EmpDAO._dis_conn(conn, cursor)
         return cnt
+
+    @staticmethod
+    def select_emp():
+        emps = []
+        sql = 'select empid,fname,email,jobid,deptid from emp'
+        conn,cursor = EmpDAO._make_conn()
+        cursor.execute(sql)
+        rs = cursor.fetchall()
+        for r in rs:
+            emp = Employee(r[0], r[1], None, r[2],
+                           None, None, r[3],
+                           None, None, None, r[4])
+            emps.append(emp)
+
+        EmpDAO._dis_conn(conn, cursor)
+        return emps

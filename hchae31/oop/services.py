@@ -149,9 +149,19 @@ class EmpService:
         emp.deptid = int(emp.deptid) if emp.deptid != '0' else None
         cnt = empdao.insert_emp(emp)
         print(f'{cnt} 건의 데이터가 추가됨!!')
-    
-    def show_emp(self):
-        pass
+
+    @staticmethod
+    def show_emp():
+        """
+        사원 테이블에서 사원번호,이름,이메일,직책,부서번호 출력
+        :return emps: 조회된 사원 정보
+        """
+        result = ''
+        emps = empdao.select_emp()
+        for emp in emps:
+            result += (f' {emp.empid}, {emp.fname}, {emp.email}, {emp.jobid},'
+                       f' {emp.deptid}\n')
+        print(result)
     
     def showone_emp(self):
         pass
