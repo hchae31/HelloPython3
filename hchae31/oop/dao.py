@@ -169,3 +169,15 @@ class EmpDAO:
 
         EmpDAO._dis_conn(conn, cursor)
         return emp
+
+    @staticmethod
+    def delete_emp(empid):
+        sql = "delete from emp where empid = %s"
+        conn, cursor = EmpDAO._make_conn()
+        params = (empid,)
+        cursor.execute(sql, params)
+        cnt = cursor.rowcount
+        conn.commit()
+        EmpDAO._dis_conn(conn, cursor)
+        return cnt
+
